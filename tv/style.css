@@ -47,10 +47,10 @@ video {
     transform: translateY(-50%);
     width: 260px; 
     height: 80vh; 
-    background: rgba(0, 0, 0, 0.85);
+    background: #0099ff1f;
     backdrop-filter: blur(25px); 
     border-radius: 14px; 
-    border: 1.5px solid #ff0000; 
+    border: 1.5px solid #0099ff59; 
     padding: 15px; 
     z-index: 10; 
     display: flex; 
@@ -70,12 +70,12 @@ video {
     align-items: center;
     gap: 8px;
 }
-.sidebar-title i { color: #ff0000; }
+.sidebar-title i { color: #0099ff; }
 
 .channel-container { overflow-y: auto; flex-grow: 1; padding-right: 5px; }
 .channel-container::-webkit-scrollbar { width: 4px; }
 .channel-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-.channel-container::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 10px; }
+.channel-container::-webkit-scrollbar-thumb { background: #0099ff; border-radius: 10px; }
 
 .channel-item { 
     display: flex; 
@@ -94,7 +94,7 @@ video {
 }
 .channel-item.active { 
     background: rgba(255, 0, 0, 0.15); 
-    border-color: #ff0000; 
+    border-color: #0099ff; 
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
 }
 .channel-item img { width: 42px; height: 28px; object-fit: contain; margin-right: 12px; border-radius: 3px; background: rgba(255,255,255,0.05); }
@@ -109,7 +109,7 @@ video {
 }
 
 .hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-input[type=range] { accent-color: #ff0000; cursor: pointer; }
+input[type=range] { accent-color: #0099ff; cursor: pointer; }
 .icon-btn { color: white; cursor: pointer; font-size: 22px; background: none; border: none; }
 
 /* লোডারটি শুধুমাত্র ভিডিও কন্টেইনারের ওপরে সঠিকভাবে অ্যালাইন হবে */
@@ -120,7 +120,7 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
 }
 .spinner {
     width: 60px; height: 60px; border: 5px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%; border-top-color: #ff0000;
+    border-radius: 50%; border-top-color: #0099ff;
     animation: spin 1s ease-in-out infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -132,16 +132,16 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
 }
 .error-card {
     position: relative;
-    background: #111; border: 2px solid #ff0000; border-radius: 20px;
+    background: #111; border: 2px solid #09f; border-radius: 20px;
     padding: 40px 30px 30px 30px; max-width: 450px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
 }
-.error-card i { font-size: 50px; color: #ff0000; margin-bottom: 15px; }
+.error-card i { font-size: 50px; color: #09f; margin-bottom: 15px; }
 .error-card h3 { font-size: 22px; margin-bottom: 10px; }
 .error-card p { font-size: 15px; color: #ccc; margin-bottom: 20px; line-height: 1.5; }
 
 .close-error-btn {
     position: absolute; top: 10px; right: 15px; background: none;
-    border: none; color: #ff0000; font-size: 32px; font-weight: bold;
+    border: none; color: #09f; font-size: 32px; font-weight: bold;
     cursor: pointer; transition: color 0.2s ease, transform 0.2s ease;
 }
 .close-error-btn:hover { color: #fff; transform: scale(1.1); }
@@ -179,7 +179,7 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
         font-weight: 700;
         font-size: 20px;
         padding: 10px 15px;
-        border-bottom: 3.5px solid #ff0000; 
+        border-bottom: 3.5px solid #0099ff; 
         gap: 10px;
         height: 50px;
         flex-shrink: 0;
@@ -197,7 +197,7 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
         height: auto;
         aspect-ratio: 16 / 9;
         flex-shrink: 0;
-        border-bottom: 3px solid #ff0000;
+        border-bottom: 3px solid #0099ff;
         position: relative;
     }
 
@@ -225,7 +225,7 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
         z-index: 10;
     }
     .mobile-fs-btn:active {
-        background: rgba(255, 0, 0, 0.8);
+        background: #0099ffcc;
     }
 
     /* পোর্ট্রেট মোডে সাইডবার স্টাইল */
@@ -251,8 +251,8 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
 
     .sidebar-title {
         background: #000;
-        border-top: 2px solid #ff0000;
-        border-bottom: 2px solid #ff0000;
+        border-top: 2px solid #0099ff;
+        border-bottom: 2px solid #0099ff;
         font-size: 18px;
         padding: 8px 15px;
         margin-bottom: 0;
@@ -300,7 +300,7 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
         height: auto;
         object-fit: contain;
         background: #fff;
-        border: 2px solid #ff0000;
+        border: 2px solid #0099ff;
         border-radius: 12px;
         padding: 6px;
         margin-right: 0;
@@ -311,8 +311,8 @@ input[type=range] { accent-color: #ff0000; cursor: pointer; }
     }
 
     .channel-item.active img {
-        border-color: #ff0000;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+        border-color: #09f;
+        box-shadow: 0 0 15px #0099ffcc;
         transform: scale(1.05);
     }
 
