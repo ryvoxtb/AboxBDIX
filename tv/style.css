@@ -93,9 +93,9 @@ video {
     border-color: rgba(255, 255, 255, 0.25);
 }
 .channel-item.active { 
-    background: rgba(255, 0, 0, 0.15); 
+    background: #09f; 
     border-color: #0099ff; 
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); 
+    box-shadow: 0 0 10px #09f; 
 }
 .channel-item img { width: 42px; height: 28px; object-fit: contain; margin-right: 12px; border-radius: 3px; background: rgba(255,255,255,0.05); }
 .channel-item span { font-size: 15px; font-weight: 600; color: #fff; }
@@ -133,7 +133,7 @@ input[type=range] { accent-color: #0099ff; cursor: pointer; }
 .error-card {
     position: relative;
     background: #111; border: 2px solid #09f; border-radius: 20px;
-    padding: 40px 30px 30px 30px; max-width: 450px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+    padding: 40px 30px 30px 30px; max-width: 450px; box-shadow: 0 0 30px #09f;
 }
 .error-card i { font-size: 50px; color: #09f; margin-bottom: 15px; }
 .error-card h3 { font-size: 22px; margin-bottom: 10px; }
@@ -305,7 +305,7 @@ input[type=range] { accent-color: #0099ff; cursor: pointer; }
         padding: 6px;
         margin-right: 0;
         margin-bottom: 6px;
-        box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+        box-shadow: 0 0 8px #09f;
         transition: transform 0.2s ease-in-out;
         box-sizing: border-box;
     }
