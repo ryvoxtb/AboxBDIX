@@ -628,7 +628,7 @@ input[type=range] {
 /* =======================================================
    ৬. মোবাইল ল্যান্ডস্কেপ (স্ক্রিন ঘোরানো) মোড
    ======================================================= */
-@media (max-width: 1024px) and (orientation: landscape) {
+@media (max-height: 500px) and (orientation: landscape) {
     html, body {
         height: 100%;
         overflow: hidden;
