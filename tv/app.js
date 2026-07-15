@@ -111,7 +111,7 @@ const SECRET_KEY = "my_super_secret_tv_key_2026";
 // প্রিমিয়াম চ্যানেলসমূহ
 const premiumChannelIds = [ '1', '2'];
 
-// উন্নত মোবাইল ও স্মার্ট টিভি ডিভাইস সনাক্তকরণ (ল্যান্ডস্কেপ এবং পোর্ট্রেট উভয় অবস্থার জন্য সঠিক হিসেব)
+// উন্নত মোবাইল ও স্মার্ট টিভি ডিভাইস সনাক্তকরণ
 function isMobileDevice() {
     const ua = navigator.userAgent.toLowerCase();
     const isTV = /tv|smarttv|googletv|appletv|tizen|webos|hbbtv|netcast|viera|firetv|boxee|rokutv|mediaroom|slcomm|digian|xtreamer/i.test(ua);
@@ -120,7 +120,6 @@ function isMobileDevice() {
     const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
     const hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     
-    // ডিভাইসটি ঘোরানো অবস্থায় থাকলে ক্ষুদ্রতম ডাইমেনশন হিসেব করে মোবাইল স্ক্রিন নির্ণয় করা হচ্ছে
     const minDimension = Math.min(window.innerWidth, window.innerHeight);
     return isMobileUA && hasTouch && (minDimension <= 768);
 }
@@ -171,7 +170,7 @@ function generateIPTVUrl(channelId) {
     return `${IPTV_SERVER_URL}/live/${channelId}.m3u8?token=${hash}&time=${timeInSeconds}`;
 }
 
-// চ্যানেল লিস্ট রেন্ডারিং (সার্চ ফিল্টারিং সাপোর্ট সহ এবং লাইভ ইন্ডিকেটর যুক্ত)
+// চ্যানেল লিস্ট রেন্ডারিং
 function buildChannelList(filterText = "") {
     if (!list) return;
     list.innerHTML = "";
@@ -313,7 +312,7 @@ if (video) {
     video.addEventListener('error', () => showError());
 }
 
-// সার্চ ইনপুট লিসেনার যুক্ত করা (রিয়েল-টাইম চ্যানেল খোঁজার জন্য)
+// সার্চ ইনপুট লিসেনার যুক্ত করা
 if (searchInput) {
     searchInput.addEventListener('input', (e) => {
         buildChannelList(e.target.value);
@@ -356,21 +355,24 @@ window.addEventListener('DOMContentLoaded', () => {
     autoStartApp();
 });
 
-// কন্ট্রোলবার অটো-হাইড লজিক
+// কন্ট্রোলবার এবং সাইডবার অটো-হাইড লজিক
 function resetTimer() {
+    // মোবাইল ডিভাইসের পোর্ট্রেট (লম্বালম্বি) মোড সনাক্তকরণ
     const isPortrait = isMobileDevice() && window.innerHeight > window.innerWidth && !document.fullscreenElement;
-    const isMobileLandscape = isMobileDevice() && !isPortrait && !document.fullscreenElement;
-    const shouldAutoHideSidebar = !isPortrait && !isMobileLandscape;
 
-    if (sidebar && shouldAutoHideSidebar) sidebar.classList.remove('hidden');
+    // পোর্ট্রেট বাদে (ডেস্কটপ, টিভি এবং মোবাইলের ল্যান্ডস্কেপ মোডে) সাইডবার এবং কন্ট্রোলবার শো করানো
+    if (sidebar) sidebar.classList.remove('hidden');
     if (controls) controls.classList.remove('hidden');
     if (mobileModeToggleBtn) mobileModeToggleBtn.classList.remove('hidden');
 
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-        if (sidebar && shouldAutoHideSidebar) sidebar.classList.add('hidden');
-        if (controls) controls.classList.add('hidden');
-        if (mobileModeToggleBtn) mobileModeToggleBtn.classList.add('hidden');
+        // মোবাইল পোর্ট্রেট মোড না হলে নির্দিষ্ট সময়ের পর সাইডবার এবং কন্ট্রোলবার হাইড করা হবে
+        if (!isPortrait) {
+            if (sidebar) sidebar.classList.add('hidden');
+            if (controls) controls.classList.add('hidden');
+            if (mobileModeToggleBtn) mobileModeToggleBtn.classList.add('hidden');
+        }
     }, 4000);
 }
 
@@ -378,7 +380,7 @@ if (video) video.addEventListener('click', resetTimer);
 document.addEventListener('mousemove', resetTimer);
 document.addEventListener('touchstart', resetTimer);
 
-// ফোন ঘোরানোর (Portrait/Landscape) সাথে সাথে সাইডবার/লেআউট স্টেট নতুন করে হিসাব করা
+// ওরিয়েন্টেশন পরিবর্তনের সাথে সাথে সাইডবার এবং কন্ট্রোলবার রিসেট করা
 window.addEventListener('orientationchange', () => setTimeout(resetTimer, 200));
 window.addEventListener('resize', resetTimer);
 
@@ -448,7 +450,6 @@ async function setPlayerMode(mode) {
         }
         video.style.setProperty('object-fit', 'contain', 'important');
         
-        // স্ক্রিন ওরিয়েন্টেশন আনলক (নরমাল স্ক্রিন)
         if (screen.orientation && typeof screen.orientation.unlock === 'function') {
             try {
                 screen.orientation.unlock();
@@ -467,7 +468,6 @@ async function setPlayerMode(mode) {
         }
         video.style.setProperty('object-fit', 'contain', 'important');
         
-        // মোবাইলে স্ক্রিনটি স্বয়ংক্রিয়ভাবে ল্যান্ডস্কেপ মোডে ঘোরানো
         if (screen.orientation && typeof screen.orientation.lock === 'function') {
             try {
                 await screen.orientation.lock('landscape');
@@ -486,7 +486,6 @@ async function setPlayerMode(mode) {
         }
         video.style.setProperty('object-fit', 'fill', 'important');
         
-        // মোবাইলে স্ক্রিনটি স্বয়ংক্রিয়ভাবে ল্যান্ডস্কেপ মোডে ঘোরানো
         if (screen.orientation && typeof screen.orientation.lock === 'function') {
             try {
                 await screen.orientation.lock('landscape');
@@ -543,7 +542,6 @@ const handleFullscreenExit = () => {
         if (video) video.style.setProperty('object-fit', 'contain', 'important');
         currentMode = 'normal';
         
-        // ফুলস্ক্রিন বন্ধ হয়ে গেলে ওরিয়েন্টেশন রিলিজ করে দেওয়া
         if (screen.orientation && typeof screen.orientation.unlock === 'function') {
             try {
                 screen.orientation.unlock();

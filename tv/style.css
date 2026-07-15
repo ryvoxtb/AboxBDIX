@@ -225,7 +225,7 @@ video {
     border-radius: 30px;
     backdrop-filter: blur(10px); 
     border: 1px solid rgba(0, 153, 255, 0.2);
-    transition: opacity 0.4s, visibility 0.4s;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .hidden { 
@@ -271,6 +271,14 @@ input[type=range] {
     display: flex; 
     flex-direction: column; 
     box-shadow: 0 10px 30px rgba(0, 153, 255, 0.25);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+}
+
+.sidebar.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateX(-20px);
+    pointer-events: none;
 }
 
 .sidebar-title {
@@ -504,18 +512,21 @@ input[type=range] {
         position: relative;
         left: 0;
         top: 0;
-        transform: none;
-        width: 100%;
-        height: auto;
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
         flex-grow: 1;
-        background: #020b14;
-        border: none;
-        border-radius: 0;
-        padding: 15px 12px;
+        background: #020b14 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 15px 12px !important;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: none;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
     .sidebar-title { display: none; }
@@ -616,7 +627,7 @@ input[type=range] {
 
 /* =======================================================
    ৬. মোবাইল ল্যান্ডস্কেপ (স্ক্রিন ঘোরানো) মোড
-   এখানে স্ক্রিন কাত করলে টিভি বা পিসির মতো চমৎকার সাইড-বাই-সাইড লেআউট তৈরি হবে
+   এখানে স্ক্রিন কাত করলে প্রিমিয়াম ভিডিও প্লেয়ার স্টাইল আসবে
    ======================================================= */
 @media (max-width: 1024px) and (orientation: landscape) {
     html, body {
@@ -631,18 +642,17 @@ input[type=range] {
     }
 
     .player-wrapper {
-        display: flex;
-        flex-direction: row; /* বাম পাশে ভিডিও এবং ডান পাশে চ্যানেল লিস্ট */
+        position: relative;
         width: 100vw;
         height: 100vh;
         overflow: hidden;
+        background: #000;
     }
 
     .video-container {
-        flex: 1; 
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         position: relative;
-        min-width: 0;
     }
 
     video { 
@@ -651,24 +661,33 @@ input[type=range] {
         object-fit: contain; 
     }
 
-    /* সাইডবার প্যানেল - এটি স্ক্রিনের ডানপাশে স্থির থাকবে */
+    /* সাইডবার প্যানেল - এটি ভাসমান সাইড ওভারলে হিসেবে বামে থাকবে */
     .sidebar {
-        position: static;
-        transform: none;
-        flex: 0 0 250px; /* চ্যানেল লিস্ট প্যানেলের জন্য স্ট্যান্ডার্ড চওড়া সাইজ */
-        width: 250px;
-        height: 100vh;
-        border-radius: 0;
-        border: none;
-        border-left: 1.5px solid rgba(0, 153, 255, 0.4);
-        box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        background: #020b14;
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
+        position: absolute !important;
+        left: 20px !important;
+        top: 20px !important;
+        bottom: 20px !important;
+        transform: none !important;
+        width: 280px !important;
+        height: calc(100% - 40px) !important;
+        border-radius: 12px !important;
+        border: 1.5px solid rgba(0, 153, 255, 0.4) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+        padding: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: rgba(4, 18, 31, 0.92) !important;
+        backdrop-filter: blur(20px) !important;
+        z-index: 10 !important;
+        transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease !important;
+    }
+
+    /* অটো হাইডের সময় মসৃণ স্লাইড আউট */
+    .sidebar.hidden {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateX(-30px) !important;
+        pointer-events: none !important;
     }
 
     .sidebar-title {
@@ -692,7 +711,7 @@ input[type=range] {
         left: 10px; 
     }
 
-    /* ল্যান্ডস্কেপ মোডে চ্যানেল লিস্টটি লম্বালম্বি সারিবদ্ধভাবে থাকবে */
+    /* ল্যান্ডস্কেপ মোডে চ্যানেল লিস্টটি সুন্দর করে সাজানো */
     .channel-container {
         display: flex;
         flex-direction: column;
@@ -723,16 +742,25 @@ input[type=range] {
         text-align: left;
     }
     
+    /* ল্যান্ডস্কেপ মোডে ভাসমান কন্ট্রোলবার প্রদর্শন */
     .bottom-right-controls { 
-        display: none !important; 
+        display: flex !important; 
+        bottom: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        z-index: 10;
+        background: rgba(3, 14, 24, 0.85); 
+        border-radius: 30px;
+        border: 1px solid rgba(0, 153, 255, 0.2);
+    }
+
+    .bottom-right-controls.hidden {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
     
     .mobile-mode-toggle-btn { 
-        display: flex; 
-        top: 8px; 
-        right: 8px; 
-        width: 34px; 
-        height: 34px; 
-        font-size: 13px; 
+        display: none !important; 
     }
 }
