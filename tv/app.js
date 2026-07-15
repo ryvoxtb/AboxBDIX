@@ -192,8 +192,11 @@ function buildChannelList(filterText = "") {
         const logoUrl = ch.logo || 'https://via.placeholder.com/50?text=TV';
         const liveBadge = (index === currentSelectedIndex) ? `<span class="live-indicator">LIVE</span>` : '';
 
+        // ইমেজের চারিদিকে channel-logo-wrapper ডিভ যুক্ত করা হয়েছে
         div.innerHTML = `
-            <img src="${logoUrl}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/50?text=TV'"> 
+            <div class="channel-logo-wrapper">
+                <img src="${logoUrl}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/50?text=TV'"> 
+            </div>
             <span class="channel-name">${ch.name}</span>
             ${liveBadge}
         `;

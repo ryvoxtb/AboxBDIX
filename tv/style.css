@@ -353,15 +353,28 @@ input[type=range] {
     box-shadow: 0 0 15px rgba(0, 153, 255, 0.3); 
 }
 
-.channel-item img { 
-    width: 55px; 
-    height: 38px; 
-    object-fit: contain; 
-    margin-right: 12px; 
-    border-radius: 6px; 
-    background: #ffffff; 
+/* ইমেজ র‍্যাপার কন্টেইনার */
+.channel-logo-wrapper {
+    width: 55px;
+    height: 38px;
+    background: #ffffff;
+    border-radius: 6px;
     padding: 3px;
+    margin-right: 12px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.channel-logo-wrapper img { 
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
 }
 
 .channel-item .channel-name {
@@ -567,17 +580,28 @@ input[type=range] {
         background: rgba(0, 153, 255, 0.05) !important;
     }
 
-    .channel-item img {
-        width: 100%;
-        height: 48px;
-        object-fit: contain;
-        background: #ffffff; 
-        border-radius: 8px;
-        padding: 4px;
+    .channel-item .channel-logo-wrapper {
+        width: 100% !important;
+        height: 48px !important;
+        background: #ffffff !important; 
+        border-radius: 8px !important;
+        padding: 4px !important;
         margin-right: 0 !important;
-        margin-bottom: 6px;
-        border: none;
-        box-shadow: none;
+        margin-bottom: 6px !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    .channel-item .channel-logo-wrapper img {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 
     .channel-item .live-indicator {
@@ -730,17 +754,29 @@ input[type=range] {
         box-sizing: border-box !important;
     }
     
-    /* ল্যান্ডস্কেপ মোডে লোগোর আকার পরিবর্তন প্রতিরোধী মানসমূহ */
-    .channel-item img { 
+    /* ল্যান্ডস্কেপ মোডে লোগো র‍্যাপার */
+    .channel-item .channel-logo-wrapper { 
         width: 64px !important;
         height: 46px !important;
-        object-fit: contain !important; /* লোগোর অরজিনাল রেশিও বজায় রাখবে */
         background: #ffffff !important;
         padding: 3px !important;
         border-radius: 6px !important;
         margin-right: 12px !important;
         margin-bottom: 0 !important;
         flex-shrink: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    .channel-item .channel-logo-wrapper img {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
     }
     
     .channel-item .channel-name { 
@@ -780,6 +816,7 @@ input[type=range] {
         display: none !important; 
     }
 }
+
 /* =======================================================
    ৭. আসল ফুলস্ক্রিন মোড (Fullscreen API) - ডিভাইসের স্ক্রিন সাইজ যাই হোক,
       ভিডিও সত্যিকারের ফুলস্ক্রিনে গেলে এই স্টাইল নিশ্চিতভাবে প্রয়োগ হবে
@@ -857,17 +894,29 @@ input[type=range] {
     box-sizing: border-box !important;
 }
 
-#playerWrapper:fullscreen .channel-item img,
-#playerWrapper:-webkit-full-screen .channel-item img {
+#playerWrapper:fullscreen .channel-item .channel-logo-wrapper,
+#playerWrapper:-webkit-full-screen .channel-item .channel-logo-wrapper {
     width: 66px !important;
     height: 48px !important;
-    object-fit: contain !important;
     background: #ffffff !important;
     padding: 3px !important;
     border-radius: 6px !important;
     margin-right: 12px !important;
     margin-bottom: 0 !important;
     flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+#playerWrapper:fullscreen .channel-item .channel-logo-wrapper img,
+#playerWrapper:-webkit-full-screen .channel-item .channel-logo-wrapper img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
 }
 
 #playerWrapper:fullscreen .channel-item .channel-name,
